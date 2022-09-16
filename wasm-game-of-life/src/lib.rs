@@ -9,14 +9,14 @@ use std::fmt;
 use wasm_bindgen::prelude::*;
 
 // Create a log macro
-use web_sys::console;
+// use web_sys::console;
 
 // A macro to provide `println!(..)`-style syntax for `console.log` logging.
-macro_rules! log {
-    ( $( $t:tt )* ) => {
-        console::log_1(&format!( $( $t )* ).into());
-    }
-}
+// macro_rules! log {
+//     ( $( $t:tt )* ) => {
+//         console::log_1(&format!( $( $t )* ).into());
+//     }
+// }
 
 // TODO: what's this?
 mod utils;
@@ -55,23 +55,20 @@ pub struct Universe {
 #[wasm_bindgen]
 impl Universe {
     pub fn new() -> Universe {
-        log!("create new universe");
+        // log!("create new universe");
         utils::set_panic_hook();
-        let width = 64;
-        let height = 64;
+        let width = 30;
+        let height = 30;
 
         let cells = (0..width * height)
             .map(|i| {
-                if i % 2 == 0 || i % 7 == 0 {
+                if i % 3 == 0 || i % 7 == 0 {
                     Cell::Alive
                 } else {
                     Cell::Dead
                 }
             })
             .collect();
-
-        log!("{}", cells);
-
         Universe {
             width,
             height,
